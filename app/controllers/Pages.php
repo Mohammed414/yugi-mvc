@@ -1,10 +1,10 @@
 <?php 
-class Pages {
+class Pages extends Controller {
     public function __construct(){
         
     }
     public function index(){
-        echo "This is the index!";
+        $this->view("hello");
     }
     public function about($id){
         echo "This is about! number ". $id;
