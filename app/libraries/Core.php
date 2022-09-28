@@ -30,7 +30,7 @@ class Core {
         */
         if(file_exists("../app/controllers/".ucwords($url[0]).".php")){
             $this->currentController = ucwords($url[0]);
-            // unset the 0 index
+            // unset the 0 index (The array keeps its order just removes the 0 index item)
             unset($url[0]);
         }
 
@@ -38,6 +38,33 @@ class Core {
         require_once '../app/controllers/'. $this->currentController . ".php";
         // Instantiate the controller in the current controller
         $this->currentController = new $this->currentController;
+
+
+
+        /* METHOD IN A CONTROLLER SECTION */
+
+        // * The default method is index
+
+        // check if url has a method or it's just index
+        if(isset($url[1])){
+            // check if the method is actually a method in the controller
+            if(method_exists($this->currentController, $url[1])){
+                // the current method will become the new method in the url
+                $this->currentMethod = $url[1];
+                // unset it 
+                unset($url[1]);
+            }
+        }
+        // Now let's get the params
+        // if any array items left then they'll just be en empty array
+        // we'll use array_values() function to turn the the remaining items in the
+        // choped up array to a new array
+        $this->params = $url ? array_values($url) : [];
+
+        // Now let's call the method in the controller class with the params 
+        // URL : controller/method/...params
+        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
+
 
 
     }
