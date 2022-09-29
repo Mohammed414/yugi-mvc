@@ -66,7 +66,6 @@ class Core {
         call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
 
 
-
     }
     public function getUrl(){
         // We need to check if the url is set so we don't get errors
