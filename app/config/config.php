@@ -14,7 +14,7 @@ $directory = dirname(dirname(__FILE__));
  */
 // APP-ROOT
 define('APPROOT', $directory);
-// APP-URL
+// APP-URL used for public folder. styles, images, scripts, etc.
 define('URLROOT', 'http://localhost/yugi-mvc');
 // SITENAME
 define('SITENAME', 'YuGiMVC');
